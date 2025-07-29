@@ -1,0 +1,2 @@
+Patchen:
+-soll es möglich sein reviewer und assignee rauszunehmen wenn diese nicht angegeben werden?
