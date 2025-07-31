@@ -4,8 +4,6 @@ from tasks_app.models import Task
 
 
 class IsBoardMember(BasePermission):
-    message = 'Verboten. Der Benutzer muss Mitglied des Boards sein, um eine Task zu erstellen.'
-
     def has_permission(self, request, view):
         if request.method in ['DELETE', 'PATCH', 'POST']:
             board_id = request.data.get('board')
@@ -20,16 +18,12 @@ class IsBoardMember(BasePermission):
 
 
 class IsBoardMemberAllowedToPatch(BasePermission):
-    message = 'Verboten. Der Benutzer muss Mitglied des Boards sein, zu dem die Task gehört.'
-
     def has_object_permission(self, request, view, obj):
         board = obj.board
         return request.user in board.members.all()
 
 
 class IsTaskCreatorOrBoardOwner(BasePermission):
-    message = 'Verboten. Nur der Ersteller der Task oder der Board-Eigentümer kann die Task löschen.'
-
     def has_object_permission(self, request, view, obj):
         return (
             request.user == obj.board.owner or
@@ -38,8 +32,6 @@ class IsTaskCreatorOrBoardOwner(BasePermission):
 
 
 class IsBoardMemberOfTask(BasePermission):
-    message = 'Verboten. Der Benutzer muss Mitglied des Boards sein, zu dem die Task gehört.'
-
     def has_permission(self, request, view):
         task_id = view.kwargs.get('pk')
         task = Task.objects.select_related('board').get(pk=task_id)
@@ -47,7 +39,5 @@ class IsBoardMemberOfTask(BasePermission):
 
 
 class IsTaskCreator(BasePermission):
-    message = 'Verboten. Nur der Ersteller des Kommentars darf ihn löschen.'
-
     def has_object_permission(self, request, view, obj):
         return request.user == obj.author
