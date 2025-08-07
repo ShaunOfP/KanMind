@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from boards_app.models import BoardDetail
 from django.contrib.auth.models import User
-from tasks_app.models import Task
-from boards_app.models import Board
+
 from tasks_app.api.serializers import TaskSerializer
 from shared.serializers import UserSerializer
+from boards_app.models import BoardDetail, Board
+from tasks_app.models import Task
 
 
 class BoardSerializer(serializers.ModelSerializer):

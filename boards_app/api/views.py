@@ -1,10 +1,11 @@
 from rest_framework import generics
-from boards_app.models import Board
-from .serializers import BoardSerializer, BoardsDetailSerializer, BoardsUpdateSerializer
-from .permissions import IsBoardMemberOrOwner, IsBoardOwner
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Q
 from rest_framework.exceptions import MethodNotAllowed
+
+from boards_app.models import Board
+from .serializers import BoardSerializer, BoardsDetailSerializer, BoardsUpdateSerializer
+from .permissions import IsBoardMemberOrOwner, IsBoardOwner
 
 
 class BoardListView(generics.ListCreateAPIView):

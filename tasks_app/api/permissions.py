@@ -1,8 +1,9 @@
 from rest_framework.permissions import BasePermission
-from boards_app.models import Board
-from tasks_app.models import Task
 from rest_framework.response import Response
 from rest_framework import status
+
+from boards_app.models import Board
+from tasks_app.models import Task
 
 
 class IsBoardMember(BasePermission):

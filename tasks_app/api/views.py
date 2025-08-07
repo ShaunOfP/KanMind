@@ -1,10 +1,11 @@
 from rest_framework import generics
 from rest_framework.exceptions import MethodNotAllowed
+from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
+
 from tasks_app.models import Comment, Task
 from .serializers import TaskSerializer, CommentSerializer
 from .permissions import IsBoardMember, IsTaskCreatorOrBoardOwner, IsBoardMemberAllowedToPatch, IsBoardMemberOfTask, IsTaskCreator
-from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import get_object_or_404
 
 
 class TaskCreateView(generics.CreateAPIView):
