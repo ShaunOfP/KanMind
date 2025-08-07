@@ -11,6 +11,7 @@ class BoardListView(generics.ListCreateAPIView):
     serializer_class = BoardSerializer
 
     def get_queryset(self):
+        """returns the boards where the user is either the owner or a member"""
         user = self.request.user
         return Board.objects.filter(Q(owner=user) | Q(members=user)).distinct()
 

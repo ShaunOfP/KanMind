@@ -12,6 +12,7 @@ class CustomLoginView(ObtainAuthToken):
     serializer_class = CustomAuthTokenSerializer
 
     def post(self, request):
+        """Returns a custom response if the post is successful, else returns the errors"""
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
@@ -31,6 +32,7 @@ class RegistrationView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        """Returns a custom response if the post is successful, else returns the errors"""
         serializer = RegistrationSerializer(data=request.data)
 
         if serializer.is_valid():

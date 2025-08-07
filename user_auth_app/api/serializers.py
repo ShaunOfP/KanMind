@@ -17,6 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def save(self):
+        """checks if passwords match and if mail is already in use. Sets the account details and saves afterwards"""
         pw = self.validated_data['password']
         repeated_pw = self.validated_data['repeated_password']
 
@@ -38,6 +39,7 @@ class CustomAuthTokenSerializer(serializers.Serializer):
     password = serializers.CharField(style={'input_type': 'password'})
 
     def validate(self, attrs):
+        """returns the user which authenticates via mail and password"""
         email = attrs.get('email')
         password = attrs.get('password')
 

@@ -74,6 +74,7 @@ class BoardsUpdateSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'owner_data', 'members_data']
 
     def update(self, instance, validated_data):
+        """Assigns the members to the board when patching and updates the member count"""
         members = validated_data.pop('members', None)
         instance = super().update(instance, validated_data)
         if members is not None:
