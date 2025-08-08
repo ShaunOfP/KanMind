@@ -30,6 +30,7 @@ class BoardSerializer(serializers.ModelSerializer):
         return board
 
     def to_representation(self, instance):
+        """Sets the default 0 for empty key-value pairs"""
         data = super().to_representation(instance)
         for key, value in data.items():
             if value is None:

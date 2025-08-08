@@ -23,6 +23,7 @@ class Task(models.Model):
         return self.title
     
     def update_count(self):
+        """When called updates the comments_count"""
         self.comments_count = Comment.objects.filter(task_id=self.id).count()
         self.save()
 

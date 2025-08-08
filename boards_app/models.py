@@ -14,6 +14,7 @@ class Board(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
+        """Sets the member count when saving a board instance"""
         if self.pk:
             self.member_count = self.members.count()
         super().save(*args, **kwargs)
@@ -22,6 +23,7 @@ class Board(models.Model):
         return self.title
 
     def update_counts(self):
+        """Updates the counts of the board when function is called."""
         from tasks_app.models import Task
         self.ticket_count = Task.objects.filter(board=self).count()
         self.tasks_high_prio_count = Task.objects.filter(
