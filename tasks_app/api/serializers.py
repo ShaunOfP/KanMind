@@ -74,9 +74,9 @@ class TaskSerializer(serializers.ModelSerializer):
         errors = []
         if value not in ['to-do', 'in-progress', 'review', 'done']:
             errors.append(
-                'Als Status werden nur to-do, in-progress, review oder done akzeptiert')
+                {'error': 'Als Status werden nur to-do, in-progress, review oder done akzeptiert'})
         if errors:
-            raise serializers.ValidationError(errors)
+            raise serializers.ValidationError({'error': errors})
         return value
 
     def validate_priority(self, value):
@@ -86,7 +86,7 @@ class TaskSerializer(serializers.ModelSerializer):
             errors.append(
                 'Als Priorität werden nur low, medium oder high akzeptiert')
         if errors:
-            raise serializers.ValidationError(errors)
+            raise serializers.ValidationError({'error': errors})
         return value
 
     def update(self, instance, validated_data):
