@@ -17,8 +17,8 @@ class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = ['id', 'title', 'member_count', 'members', 'ticket_count',
-                  'tasks_to_do_count', 'tasks_high_prio_count', 'owner']
-        read_only_fields = ['member_count', 'owner']
+                  'tasks_to_do_count', 'tasks_high_prio_count', 'owner_id']
+        read_only_fields = ['member_count', 'owner_id']
 
     def create(self, validated_data):
         """Assigns the members to the board and updates the counter"""
