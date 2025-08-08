@@ -7,6 +7,8 @@ from shared.serializers import UserSerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.CharField(source='author.username', read_only=True)
+
     class Meta:
         model = Comment
         fields = ['id', 'created_at', 'author', 'content']
