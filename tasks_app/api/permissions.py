@@ -1,6 +1,6 @@
 from rest_framework.permissions import BasePermission
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
 
 from boards_app.models import Board
 from tasks_app.models import Task
@@ -16,7 +16,7 @@ class IsBoardMember(BasePermission):
             try:
                 board = Board.objects.get(id=board_id)
             except Board.DoesNotExist:
-                return Response({'error': 'Board does not exist'}, status=status.HTTP_404_NOT_FOUND)
+                raise NotFound({'error': 'Board does not exist'})
             return request.user in board.members.all()
         return True
 
@@ -44,7 +44,7 @@ class IsBoardMemberOfTask(BasePermission):
             task_id = view.kwargs.get('pk')
             task = Task.objects.select_related('board').get(pk=task_id)
         except Task.DoesNotExist:
-            return Response({'error': 'Task does not exist'}, status=status.HTTP_404_NOT_FOUND)
+            raise NotFound({'error': 'Task does not exist'})
         return request.user in task.board.members.all()
 
 
