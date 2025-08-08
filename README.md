@@ -99,7 +99,7 @@ You may delete a board via the DELETE-Method, however you need to be the owner o
 ## Email Check
 Endpoint: localhost/api/email-check/
 
-To check for a mail just enter the mail at the end of the Endpoint-url, e.g. localhost/api/email-check/john@doe.de/
+To check for a mail just enter the mail at the end of the Endpoint-url, e.g. localhost/api/email-check/?email=john@doe.de
 This allows you to see if an email is already in use. You need to be authenticated to use this.
 
 ## Tasks
