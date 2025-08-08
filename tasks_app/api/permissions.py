@@ -40,8 +40,11 @@ class IsTaskCreatorOrBoardOwner(BasePermission):
 class IsBoardMemberOfTask(BasePermission):
     def has_permission(self, request, view):
         """Checks if the user is a member of the Board which the current task is assigned to"""
-        task_id = view.kwargs.get('pk')
-        task = Task.objects.select_related('board').get(pk=task_id)
+        try:
+            task_id = view.kwargs.get('pk')
+            task = Task.objects.select_related('board').get(pk=task_id)
+        except Task.DoesNotExist:
+            return Response({'error': 'Task does not exist'}, status=status.HTTP_404_NOT_FOUND)
         return request.user in task.board.members.all()
 
 
