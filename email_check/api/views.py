@@ -9,7 +9,7 @@ class EmailCheckView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         """retrieves the email from the kwags and returns the object of the user if it exists"""
-        email = kwargs['email']
+        email = request.query_params.get('email')
         if not email:
             return Response({'error': 'Email query parameter is required.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
